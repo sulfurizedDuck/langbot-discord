@@ -1,5 +1,7 @@
 require('dotenv').config();
 const {Client, Intents} = require('discord.js');
+const database = require('./db/database');
+const BondQueryProcessor = require('./query/BondQueryProcessor');
 const client = new Client({
   intents: [
     Intents.FLAGS.GUILDS,
@@ -11,7 +13,7 @@ client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`)
 });
 
-client.on('messageCreate', message => {
+client.on('messageCreate', async(message) => {
   if (message.author.bot) return;
 
   if (message.content[0] != '/') return;
@@ -20,7 +22,11 @@ client.on('messageCreate', message => {
   const args = content.split(/ +/g);
   const command = args.shift().toLowerCase();
 
-  // TODO args content and answer from database
+  if (command == 'bond') {
+    let response = await BondQueryProcessor.getBond(args[0]);
+    message.channel.send(response);
+  }
+
 });
 
 client.login(process.env.BOT_TOKEN);
