@@ -1,13 +1,14 @@
 const database = require('../db/database');
 
 const queries = {
-  getUnitByName: "SELECT * FROM units WHERE name = $1 LIMIT 1;",
-  getAtkBondLockedBy: "SELECT name FROM units WHERE atk_bond = $1",
-  getDefBondLockedBy: "SELECT name FROM units WHERE def_bond = $1",
+  getUnitByName: "SELECT * FROM units WHERE LOWER(name) = LOWER($1) LIMIT 1;",
+  getAtkBondLockedBy: "SELECT name FROM units WHERE LOWER(atk_bond) = LOWER($1)",
+  getDefBondLockedBy: "SELECT name FROM units WHERE LOWER(def_bond) = LOWER($1)",
 }
 
 module.exports = {
   getBond: async(unitName) => {
+    unitName = unitName.toLowerCase();
     const units = await database.query(queries.getUnitByName, [unitName]);
 
     if (units.rowCount == 0) return null;
