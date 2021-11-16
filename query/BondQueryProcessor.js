@@ -11,7 +11,7 @@ module.exports = {
     unitName = unitName.toLowerCase();
     const units = await database.query(queries.getUnitByName, [unitName]);
 
-    if (units.rowCount == 0) return "";
+    if (units.rowCount == 0) return null;
     const unit = units.rows[0];
 
     let unlocksAttackFor = await database.query(queries.getAtkBondLockedBy, [unit.name]);

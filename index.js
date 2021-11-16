@@ -24,7 +24,9 @@ client.on('messageCreate', async(message) => {
 
   if (command == 'bond') {
     let response = await BondQueryProcessor.getBond(args[0]);
-    message.channel.send(response);
+    if (response) {
+      message.channel.send(response);
+    }
   }
 
 });
