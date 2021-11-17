@@ -8,15 +8,14 @@ const queries = {
 module.exports = {
   insertNickname: async(unitName, nickname) => {
     const units = await database.query(queries.getUnitByName, [unitName]);
-    if (units.rowCount == 0) return null;
+    if (units.rowCount == 0) return `Unit named ${unitName} not found...`;
 
-    const unit = units.rows[0]
+    const unit = units.rows[0];
     const unitId = unit.id;
-    return id;
 
-    // const success = await database.query(queries.insertNickname, [unitId, nickname]);
+    await database.query(queries.insertNickname, [unitId, nickname]);
     
-    // let response = `Nickname ${nickname} has been successfully added for ${unit.name}`;
-    // return response;
+    let response = `Nickname ${nickname} has been successfully added for ${unit.name}`;
+    return response;
   }
 };
