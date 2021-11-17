@@ -20,11 +20,12 @@ client.on('messageCreate', async(message) => {
   if (message.content[0] != '/') return;
 
   const content = message.content.slice(1).trim();
-  const args = content.split(/ +/g);
+  let args = content.split(/ +/g);
   const command = args.shift().toLowerCase();
+  let parameter = args.join(' ');
 
   if (command == 'bond') {
-    let response = await BondQueryProcessor.getBond(args[0]);
+    let response = await BondQueryProcessor.getBond(parameter);
     if (response) {
       message.channel.send(response);
     }
