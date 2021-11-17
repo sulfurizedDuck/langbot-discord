@@ -3,6 +3,7 @@ const {Client, Intents} = require('discord.js');
 const database = require('./db/database');
 const BondQueryProcessor = require('./query/BondQueryProcessor');
 const NicknameQueryProcessor = require('./query/NicknameQueryProcessor');
+const UnitQueryProcessor = require('./query/UnitQueryProcessor');
 const client = new Client({
   intents: [
     Intents.FLAGS.GUILDS,
@@ -28,12 +29,18 @@ client.on('messageCreate', async(message) => {
   let response = null;
 
   switch(command) {
+    case 'list':
+      response = await UnitQueryProcessor.getAllUnits();
+      break;
     case 'bond':
       response = await BondQueryProcessor.getBond(parameter);
       break;
     case 'addnickname':
       const [unitName, nickname] = parameter.split(',').map(x => x.trim());
       response = await NicknameQueryProcessor.insertNickname(unitName, nickname);
+      break;
+    case 'getnickname':
+      response = await NicknameQueryProcessor.getNickname(parameter);
       break;
   }
 

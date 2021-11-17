@@ -1,9 +1,5 @@
 const database = require('../db/database');
-
-const queries = {
-  getUnitByName: "SELECT * FROM units WHERE LOWER(name) = LOWER($1) LIMIT 1;",
-  insertNickname: "INSERT INTO nicknames(unit_id, nickname) VALUES($1, $2);",
-};
+const queries = require('./queries');
 
 module.exports = {
   insertNickname: async(unitName, nickname) => {
@@ -17,5 +13,21 @@ module.exports = {
     
     let response = `Nickname ${nickname} has been successfully added for ${unit.name}`;
     return response;
-  }
+  },
+  getNickname: async(unitName) => {
+    let nicknames = await database.query(queries.getNicknamesForUnit, [unitName]);
+
+    if (nicknames.rowCount == 0) {
+      return `No nickname set for ${unitName} yet...`;
+    }
+
+    nicknames = nicknames.rows.map(row => row.nickname);
+
+    let response = `
+${unitName}
+Nicknames: ${nicknames.join(', ')}
+    `;
+
+    return response;
+  },
 };
