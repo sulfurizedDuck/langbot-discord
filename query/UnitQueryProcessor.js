@@ -1,5 +1,5 @@
 const database = require('../db/database');
-const queries = require('./queries');
+const queries = require('./Queries');
 
 module.exports = {
   getAllUnits: async() => {
