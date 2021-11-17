@@ -24,11 +24,16 @@ client.on('messageCreate', async(message) => {
   const command = args.shift().toLowerCase();
   let parameter = args.join(' ');
 
-  if (command == 'bond') {
-    let response = await BondQueryProcessor.getBond(parameter);
-    if (response) {
-      message.channel.send(response);
-    }
+  let response = null;
+
+  switch(command) {
+    case 'bond':
+      response = await BondQueryProcessor.getBond(parameter);
+      break;
+  }
+
+  if (response) {
+    message.channel.send(response);
   }
 
 });
