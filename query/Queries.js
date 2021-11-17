@@ -1,4 +1,5 @@
 module.exports = {
+  insertUnit: "INSERT INTO units(name, atk_bond, def_bond) VALUES($1, $2, $3);",
   getAllUnits: "SELECT * FROM units;",
   getUnitByName: "SELECT * FROM units WHERE LOWER(name) = LOWER($1) LIMIT 1;",
   getUnitByNickname: "SELECT units.* FROM units JOIN nicknames ON units.id=nicknames.unit_id WHERE LOWER(nicknames.nickname) = LOWER($1) LIMIT 1;",

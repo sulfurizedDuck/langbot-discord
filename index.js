@@ -32,11 +32,15 @@ client.on('messageCreate', async(message) => {
     case 'list':
       response = await UnitQueryProcessor.getAllUnits();
       break;
+    case 'addunit':
+      [unitName, atkBond, defBond] = parameter.split(',').map(x => x.trim());
+      response = await UnitQueryProcessor.addUnit(unitName, atkBond, defBond);
+      break;
     case 'bond':
       response = await BondQueryProcessor.getBond(parameter);
       break;
     case 'addnickname':
-      const [unitName, nickname] = parameter.split(',').map(x => x.trim());
+      [unitName, nickname] = parameter.split(',').map(x => x.trim());
       response = await NicknameQueryProcessor.insertNickname(unitName, nickname);
       break;
     case 'getnickname':
