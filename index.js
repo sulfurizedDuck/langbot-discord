@@ -2,6 +2,7 @@ require('dotenv').config();
 const {Client, Intents} = require('discord.js');
 const database = require('./db/database');
 const BondQueryProcessor = require('./query/BondQueryProcessor');
+const FactionQueryProcessor = require('./query/FactionQueryProcessor');
 const NicknameQueryProcessor = require('./query/NicknameQueryProcessor');
 const UnitQueryProcessor = require('./query/UnitQueryProcessor');
 const client = new Client({
@@ -45,6 +46,9 @@ client.on('messageCreate', async(message) => {
       break;
     case 'getnickname':
       response = await NicknameQueryProcessor.getNickname(parameter);
+      break;
+    case 'faction':
+      response = await FactionQueryProcessor.getUnitFaction(parameter);
       break;
   }
 
