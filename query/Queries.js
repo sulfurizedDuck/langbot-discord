@@ -7,5 +7,4 @@ module.exports = {
   getNicknamesForUnit: "SELECT nicknames.* FROM nicknames JOIN units ON nicknames.unit_id = units.id WHERE LOWER(units.name) = LOWER($1)",
   getAtkBondLockedBy: "SELECT name FROM units WHERE LOWER(atk_bond) = LOWER($1)",
   getDefBondLockedBy: "SELECT name FROM units WHERE LOWER(def_bond) = LOWER($1)",
-
 };

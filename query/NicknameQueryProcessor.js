@@ -6,6 +6,9 @@ module.exports = {
     const units = await database.query(queries.getUnitByName, [unitName]);
     if (units.rowCount == 0) return `Unit named ${unitName} not found...`;
 
+    const existingNickname = await database.query(queries.getUnitByNickname, [nickname]);
+    if (existingNickname.rowCount != 0) return `Nickname ${nickname} already taken...`;
+
     const unit = units.rows[0];
     const unitId = unit.id;
 
