@@ -50,6 +50,9 @@ client.on('messageCreate', async(message) => {
     case 'faction':
       response = await FactionQueryProcessor.getUnitFaction(parameter);
       break;
+    case 'echo':
+      response = `\\${parameter}`;
+      break;
   }
 
   if (response) {
