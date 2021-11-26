@@ -51,7 +51,8 @@ client.on('messageCreate', async(message) => {
       response = await FactionQueryProcessor.getUnitFaction(parameter);
       break;
     case 'echo':
-      response = `\\${parameter}`;
+      args = args.map(emoji => `\\${emoji}`);
+      response = args.join(' ');
       break;
   }
 
