@@ -8,5 +8,5 @@ module.exports = {
   getAtkBondLockedBy: "SELECT name FROM units WHERE LOWER(atk_bond) = LOWER($1)",
   getDefBondLockedBy: "SELECT name FROM units WHERE LOWER(def_bond) = LOWER($1)",
   getFactionsByNickname: "SELECT u.name as uname, f.name as fname FROM factions f JOIN unit_faction uf ON f.id=uf.faction_id JOIN units u ON u.id=uf.unit_id JOIN nicknames n oN n.unit_id=u.id WHERE LOWER(n.nickname)=LOWER($1);",
-  getFactionsByName: "SELECT u.name as uname, f.name as fname FROM factions f JOIN unit_faction uf ON f.id=uf.faction_id JOIN units u ON u.id=uf.unit_id WHERE LOWER(u.name)=LOWER($1);",
+  getFactionsByName: "SELECT u.name as uname, f.emoji as femoji FROM factions f JOIN unit_faction uf ON f.id=uf.faction_id JOIN units u ON u.id=uf.unit_id WHERE LOWER(u.name)=LOWER($1);",
 };
