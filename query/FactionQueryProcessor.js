@@ -12,12 +12,12 @@ module.exports = {
       if (factions.rowCount == 0) return null;
     }
 
-    const factionExtracted = factions.rows.map(row => row.femoji);
+    const factionExtracted = factions.rows.map(row => row.fname);
     const unitRealName = factions.rows[0].uname;
 
     let response = `
 ${unitRealName}
-Factions: ${factionExtracted.join(' ')}
+Factions: ${factionExtracted.join(', ')}
     `;
     return response;
 
