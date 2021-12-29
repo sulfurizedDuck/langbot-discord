@@ -20,6 +20,12 @@ ${unitRealName}
 Factions: ${factionExtracted.join(', ')}
     `;
     return response;
+  },
+  setUnitFaction: async(unitName, unitFactions) => {
+    const factions = await database.query(Queries.getAllFactions, []);
+    const extractedFactions = factions.rows;
 
-  }
+    const unitFactionIds = unitFactions.map(unitFaction => 
+      extractedFactions.find(ef => ef.name == unitFaction).name);
+  },
 };
