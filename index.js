@@ -2,6 +2,7 @@ require('dotenv').config();
 const {Client, Intents} = require('discord.js');
 const database = require('./db/database');
 const BondQueryProcessor = require('./query/BondQueryProcessor');
+const BuildQueryProcessor = require('./query/BuildQueryProcessor');
 const FactionQueryProcessor = require('./query/FactionQueryProcessor');
 const NicknameQueryProcessor = require('./query/NicknameQueryProcessor');
 const UnitQueryProcessor = require('./query/UnitQueryProcessor');
@@ -50,9 +51,12 @@ client.on('messageCreate', async(message) => {
     case 'faction':
       response = await FactionQueryProcessor.getUnitFaction(parameter);
       break;
-    case 'echo':
-      args = args.map(emoji => `\\${emoji}`);
-      response = args.join(' ');
+    case 'build':
+      response = await BuildQueryProcessor.getBuild(parameter);
+      break;
+    case 'updatebuild':
+      [unitName, buildUrl] = parameter.split(',').map(x => x.trim());
+      response = await BuildQueryProcessor.updateBuild(unitName, buildUrl);
       break;
   }
 

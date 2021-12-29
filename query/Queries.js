@@ -10,4 +10,5 @@ module.exports = {
   getAllFactions: "SELECT * FROM factions;",
   getFactionsByNickname: "SELECT u.name as uname, f.name as fname FROM factions f JOIN unit_faction uf ON f.id=uf.faction_id JOIN units u ON u.id=uf.unit_id JOIN nicknames n oN n.unit_id=u.id WHERE LOWER(n.nickname)=LOWER($1);",
   getFactionsByName: "SELECT u.name as uname, f.name as fname FROM factions f JOIN unit_faction uf ON f.id=uf.faction_id JOIN units u ON u.id=uf.unit_id WHERE LOWER(u.name)=LOWER($1);",
+  updateBuildPref: "UPDATE units SET build_pref=$1 WHERE id=$2",
 };
