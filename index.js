@@ -4,6 +4,7 @@ const database = require('./db/database');
 const BondQueryProcessor = require('./query/BondQueryProcessor');
 const BuildQueryProcessor = require('./query/BuildQueryProcessor');
 const FactionQueryProcessor = require('./query/FactionQueryProcessor');
+const HelpQueryProcessor = require('./query/HelpQueryProcessor');
 const NicknameQueryProcessor = require('./query/NicknameQueryProcessor');
 const UnitQueryProcessor = require('./query/UnitQueryProcessor');
 const client = new Client({
@@ -57,6 +58,12 @@ client.on('messageCreate', async(message) => {
     case 'updatebuild':
       [unitName, buildUrl] = parameter.split(',').map(x => x.trim());
       response = await BuildQueryProcessor.updateBuild(unitName, buildUrl);
+      break;
+    case 'help':
+      response = await HelpQueryProcessor.getHelp();
+      break;
+    case 'adminhelp':
+      response = await HelpQueryProcessor.getAdminHelp();
       break;
   }
 
