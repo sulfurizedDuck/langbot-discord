@@ -59,10 +59,10 @@ client.on('messageCreate', async(message) => {
       [unitName, buildUrl] = parameter.split(',').map(x => x.trim());
       response = await BuildQueryProcessor.updateBuild(unitName, buildUrl);
       break;
-    case 'help':
+    case 'hewp':
       response = await HelpQueryProcessor.getHelp();
       break;
-    case 'adminhelp':
+    case 'adminhewp':
       response = await HelpQueryProcessor.getAdminHelp();
       break;
   }
