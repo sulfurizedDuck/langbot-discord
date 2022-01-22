@@ -3,6 +3,10 @@ const Queries = require('./Queries');
 
 module.exports = {
   updateBuild: async(unitName, buildUrl) => {
+    if (!buildUrl) {
+      return "build preferences not found!";
+    }
+
     unitName = unitName.toLowerCase();
     let units = await database.query(Queries.getUnitByName, [unitName]);
 
