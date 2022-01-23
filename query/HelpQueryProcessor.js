@@ -21,6 +21,9 @@ Bot's management command list:
 > **/addunit <name>, <atk bond>, <def bond>**
 add new hero to the bot. If the hero doesn't require someone else to unlock their bond, just put '-' for it
 
+> **/updatefaction <name>, <faction1>, <faction2>, ...**
+update the factions for a hero
+
 > **/addnickname <hero>, <nickname>**
 add nickname for a hero
 
