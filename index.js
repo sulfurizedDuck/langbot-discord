@@ -52,6 +52,10 @@ client.on('messageCreate', async(message) => {
     case 'faction':
       response = await FactionQueryProcessor.getUnitFaction(parameter);
       break;
+    case 'updatefaction':
+      [unitName, ...factions] = parameter.split(',').map(x => x.trim());
+      response = await FactionQueryProcessor.setUnitFaction(unitName, factions);
+      break;
     case 'build':
       response = await BuildQueryProcessor.getBuild(parameter);
       break;
