@@ -5,7 +5,7 @@ module.exports = {
   insertNickname: async(unitName, nickname) => {
     let units = await database.query(queries.getUnitByName, [unitName]);
     if (units.rowCount == 0) {
-      units = await database.query(Queries.getUnitByNickname, [unitName]);
+      units = await database.query(queries.getUnitByNickname, [unitName]);
       if (units.rowCount == 0) return `Unit named ${unitName} not found...`;
     }
 
