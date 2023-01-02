@@ -3,8 +3,11 @@ const queries = require('./Queries');
 
 module.exports = {
   insertNickname: async(unitName, nickname) => {
-    const units = await database.query(queries.getUnitByName, [unitName]);
-    if (units.rowCount == 0) return `Unit named ${unitName} not found...`;
+    let units = await database.query(queries.getUnitByName, [unitName]);
+    if (units.rowCount == 0) {
+      units = await database.query(Queries.getUnitByNickname, [unitName]);
+      if (units.rowCount == 0) return `Unit named ${unitName} not found...`;
+    }
 
     const existingNickname = await database.query(queries.getUnitByNickname, [nickname]);
     if (existingNickname.rowCount != 0) return `Nickname ${nickname} already taken...`;
