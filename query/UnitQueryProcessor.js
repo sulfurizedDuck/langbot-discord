@@ -5,8 +5,8 @@ module.exports = {
   getAllUnits: async() => {
     let units = await database.query(queries.getAllUnits, []);
     
-    units = units.rows.map(unit => unit.name).sort((a, b) => a < b ? 1 : -1);
-    return units.join('\n ');
+    units = units.rows.map(unit => unit.name).sort((a, b) => a < b ? -1 : 1);
+    return units.join('\n');
   },
   addUnit: async(unitName, atkBond, defBond) => {
     if (!unitName || !atkBond || !defBond) {
